@@ -1,0 +1,97 @@
+<section>
+    <h3>CQRS</h3>
+    <ul>
+        <li>Command Query Responsibility Segregation</li>
+        <li>splitting of updating and reading of information's</li>
+    </ul>
+</section>
+<section>
+    <h4>CRUD Application</h4>
+    <img src="assets/CRUD_application.png">
+    <p class="cite">https://martinfowler.com/bliki/images/cqrs/single-model.png</p>
+    <aside class="notes">
+        <ul>
+            <li>In a basic CRUS application the same model (or models) is used for updating and reading data.</li>
+            <li>In some cases we see a DTO-model, domain-model and entity-model.</li>
+            <li>These different models are used for updating and reading data.
+                <ul>
+                    <li>DTO-model (DataTransferObject): As the name implies, it is used for transferring data to the outside of the application.</li>
+                    <li>Domain-model: Is in the middle and all the business logic works with this model.</li>
+                    <li>Entity-model: Used for saving and reading data from the DB.</li>
+                </ul>
+            </li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>CQRS Application</h4>
+    <img src="assets/CQRS_application.png">
+    <p class="cite">https://martinfowler.com/bliki/images/cqrs/cqrs.png</p>
+    <aside class="notes">
+        <ul>
+            <li>A CQRS application has at least two data models.</li>
+            <li>One query model and one command model.</li>
+            <li>But it is also possible to have more data models as for the CRUD application.</li>
+            <li>It could for example also contain DTO-models, etc.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>Two data models?</h4>
+    <pre class="">
+        <code class="language-csharp" data-line-numbers="">public record UserCommandModel(
+    string Firstname,
+    string Lastname,
+    string Password
+);
+public record UserQueryModel(string DisplayName);
+</code>
+        </pre>
+    <pre class="">
+        <code class="language-csharp" data-line-numbers="">public interface UserCommandModel(
+    string Firstname,
+    string Lastname,
+    string Password
+);
+public interface UserQueryModel(string DisplayName);
+public record UserModel(
+    string Firstname,
+    string Lastname,
+    string DisplayName,
+    string Password
+);
+</code>
+        </pre>
+    <aside class="notes">
+        <ul>
+            <li>We do not necessarily need two separate data models to implement CQRS.</li>
+            <li>The main idea is only to have them logically separated.</li>
+            <li>Under the hood there could be the same data model, but interfaces provide two different views on it.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>CQRS != EventStore</h4>
+    <ul>
+        <li>CQRS is only the segregation of command and query model</li>
+        <li>CQRS can work with a simple database or an EventStore</li>
+        <li>CQRS and EventSourcing can work quite well together</li>
+    </ul>
+</section>
+<section>
+    <h4>When to use it</h4>
+    <ul>
+        <li>Command model and query model is very different</li>
+        <li>Domain business logic is complicated and fits CQRS</li>
+        <li>High performance applications (separate read and write)</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>When the business logic is very complicated, it can help to split it into read and write logic.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <p>While I have come across successful uses of CQRS, so far the majority of cases I've run into have not been so good, with CQRS seen as a significant force for getting a software system into serious difficulties.</p>
+    <p class="cite">Martin Fowler</p>
+</section>

@@ -1,0 +1,27 @@
+<section>
+    <h3>EventSourcing</h3>
+    <p>Capture all changes to an application state as a sequence of events.</p>
+    <p class="cite">Martin Fowler</p>
+</section>
+<section>
+    <h4>What is EventSourcing?</h4>
+    <ul>
+        <li>a kind of event driven architecture</li>
+        <li>sequence of events instead of a database record</li>
+        <li>saving the whole history instead of a snapshot</li>
+        <li>always inside one service</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>EventSourcing should only be used inside a service and not between them.</li>
+            <li>It should not be used for communication, only for saving state.</li>
+        </ul>
+    </aside>
+</section>
+<section>
+    <h4>When to use EventSourcing?</h4>
+    <ul>
+        <li>When you need history or audit logging for example in finance</li>
+        <li></li>
+    </ul>
+</section>
