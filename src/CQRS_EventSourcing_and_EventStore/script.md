@@ -8,3 +8,4 @@ https://stackoverflow.com/questions/8820748/when-to-use-the-cqrs-design-pattern
 EventSourcing:
 https://martinfowler.com/eaaDev/EventSourcing.html
 https://event-driven.io/en/when_not_to_use_event_sourcing/
+https://martinfowler.com/articles/201701-event-driven.html
