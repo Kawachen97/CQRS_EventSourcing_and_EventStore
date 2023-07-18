@@ -28,4 +28,27 @@
 <section>
   <h4>Current implementation in the WPS</h4>
   <img style="height: 600px" src="assets/WPS_implementation.png" >
+  <aside class="notes">
+    <ul>
+      <li>As you can see, Kafka is not eventual consistent. It could be, that Kafka is down and the EventStore is available.</li>
+      <li>In this case, the data would be saved inside the EventStore, but not in Kafka. So we have a inconsistency.</li>
+      <li>It would be the same the other way around. When the EventStore is down, but Kafka is available, the data would be saved inside Kafka, but is missing in EventStore.</li>
+      <li>The correct implementation would be, if the EventHandler saves data to the DB and to Kafka. We also need a retry mechanism.</li>
+      <li>In this scenario, the EventHandler would not mark the Event as consumed, while Kafka or DB is down. It retries until the data was successfully send to both data stores.</li>
+      <li>At best the messages send to Kafka and the entries saved in the DB are idempotent. In this case, the EventHandler doesn't need to know, if something was already send to Kafka, or saved to the DB.</li>
+    </ul>
+  </aside>
+</section>
+<section>
+  <h4>Current implementation in WPS without EventStore</h4>
+  <img src="assets/WPS_without_EventStore.png" >
+  <aside class="notes">
+    <ul>
+      <li>In this example we have a similar consistency issue event without the EventStore.</li>
+      <li>If the DB or Kafka is down, we could end up in inconsistency.</li>
+      <li>It isn't worse than with the EventStore, because of the poor implementation.</li>
+      <li>But we can see, that we need to change something about the possible inconsistencies.</li>
+      <li>The solution is called the outbound pattern.</li>
+    </ul>
+  </aside>
 </section>

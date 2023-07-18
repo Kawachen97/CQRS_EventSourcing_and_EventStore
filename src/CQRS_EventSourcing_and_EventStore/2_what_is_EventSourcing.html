@@ -26,6 +26,7 @@
         <li>when you need audit capability</li>
         <li>financial transactions are fitting use cases</li>
         <li>when you want to have a look at historical states</li>
+        <li>replaying events on a test environment</li>
     </ul>
 </section>
 <section>
@@ -35,4 +36,20 @@
         <li>"supporting modules" for example CMS systems</li>
         <li>it adds a lot of complexity</li>
     </ul>
+</section>
+<section>
+    <h4>Complexity</h4>
+    <ul>
+        <li>more DataModels (EventModel)</li>
+        <li>Event logic on top</li>
+        <li>more points of possible failures (EventStore)</li>
+        <li>its a different way of thinking</li>
+    </ul>
+    <aside class="notes">
+        <ul>
+            <li>CRUD applications are very common and developers are therefor more familiar with them.</li>
+            <li>This naturally leads to more misconceptions when working with EventSourcing, especially with CQRS.</li>
+            <li>And this also leads to poor implementations.</li>
+        </ul>
+    </aside>
 </section>
